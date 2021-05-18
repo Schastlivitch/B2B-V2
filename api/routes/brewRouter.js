@@ -1,0 +1,149 @@
+const router = require("express").Router();
+const jwt = require('jsonwebtoken');
+const Beer = require("../db/beer.model");
+const Request = require("../db/request.model");
+const User = require('../db/userModel')
+
+
+
+
+// Все бары
+router.get("/allbars", async (req, res) => {
+  try {
+    const allBars = await User.find({role: 'bar'})
+    const allBarsFront = allBars.map((bar) => {
+      return {
+        _id: bar._id,
+        location: bar.location,
+        contacts: bar.contacts,
+        title: bar.title,
+        about: bar.about,
+        favourites: bar.favourites,
+        login: bar.login,
+        email: bar.email,
+        role: bar.role
+      }
+    })
+    res.send(allBarsFront).status(200)
+  } catch (err) {
+    console.log('error');
+  }
+});
+
+
+// Все запросы 
+router.get("/requests", async (req, res) => {
+  const allRequests = await Request.find().populate('bar')
+  res.json(allRequests).status(200)
+});
+
+// Один запрос - сменить статус на просмотрено
+router.patch("/request/:id", async (req, res) => {
+  try {
+    const currentRequest = await Request.findById(req.params.id)
+    currentRequest.active = false
+    await currentRequest.save()
+    res.sendStatus(200)
+  } catch (err) {
+
+  }
+});
+
+// Один запрос
+router.get("/request/:id", (req, res) => {
+
+});
+
+// Один бар
+router.get("/bar/:id", (req, res) => {
+
+});
+
+// Личный кабинет
+router.get("/lk/:id", async (req, res) => {
+  try {
+    const currentBrewer = await Brew.findById(req.params.id)
+    delete currentBrewer.password
+    res.send(currentBrewer).status(200)
+  } catch (err) {
+
+  }
+});
+
+// Личный кабинет - редактирование
+router.patch("/lk/:id", async (req, res) => {
+  try {
+    const changes = req.body
+    const ID = req.params.id
+    const currentBrewer = await Brew.findByIdAndUpdate(ID, { ...changes })
+    const changedBrewer = await Brew.findById(ID)
+    delete changedBrewer.password
+    res.sendStatus(200)
+  } catch (err) {
+    res.sendStatus(400)
+  }
+});
+
+// Мои бары
+router.get("/mybars/:id", (req, res) => {
+
+});
+
+// Мои бары - добавление
+router.post("/mybars/:id", (req, res) => {
+
+});
+
+// Мои бары - удаление
+router.delete("/mybars/:id", (req, res) => {
+
+});
+
+// Мои пива
+router.get("/beers/:id", async (req, res) => {
+  try {
+    const requests = await Beer.find({ brewery: req.params.id })
+    res.send(requests).status(200)
+  } catch (err) {
+
+  }
+});
+
+// Мои пива - добавление
+router.post("/beers", async (req, res) => {
+  console.log(req.body);
+  try {
+    const newRequest = await Beer.create(req.body)
+    res.json(newRequest).status(200)
+  } catch (err) {
+    console.log(err);
+  }
+
+});
+
+// Мои пива - изменение
+router.patch("/beers/", async (req, res) => {
+  const ID = req.body._id
+  const requetsFromClient = req.body
+  delete requetsFromClient._id
+  delete requetsFromClient.bar
+  try {
+    await Beer.findByIdAndUpdate(ID, { ...requetsFromClient })
+    const newRequest = await Beer.findById(ID)
+    res.json(newRequest).status(200)
+  } catch (err) {
+
+  }
+});
+
+// Мои пива - удаление
+router.delete("/beers/:id", async (req, res) => {
+  try {
+    await Beer.findByIdAndDelete(req.params.id)
+    res.sendStatus(200)
+  } catch (err) {
+
+  }
+});
+
+module.exports = router;
