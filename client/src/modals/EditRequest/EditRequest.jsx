@@ -1,12 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addNewRequestThunk } from "../../redux/thunks/requestThunk";
+import { editRequestThunk } from "../../redux/thunks/requestThunk";
 
-const NewRequest = () => {
-
+const EditRequest = ({request}) => {
 
   const dispatch = useDispatch()
-  const userID = useSelector(state => state.user._id)
+  // const userID = useSelector(state => state.user._id)
+  const requestID = request._id
 
   const [title, setTitle] = useState('');
   const [isPermanentSupply, setIsPermanentSupply] = useState('');
@@ -14,6 +14,15 @@ const NewRequest = () => {
   const [price, setPrice] = useState('');
   const [about, setAbout] = useState('');
   const [sort, setSort] = useState('');
+
+  useEffect(() => {
+    setTitle(request.title)
+    setIsPermanentSupply(request.isPermanentSupply)
+    setSupplyVolume(request.supplyVolume)
+    setPrice(request.price)
+    setAbout(request.about)
+    setSort(request.sort)
+  }, [])
 
   const isPermanentSupplyHandler = (e) => {
     setIsPermanentSupply(e.target.value);
@@ -34,9 +43,9 @@ const NewRequest = () => {
     setSort(e.target.value);
   };
 
-  const newRequestHandler = async () => {
-    dispatch(addNewRequestThunk({
-      bar: userID,
+  const editRequestHandler = async () => {
+    dispatch(editRequestThunk({
+      _id: requestID,
       isPermanentSupply,
       supplyVolume,
       price,
@@ -54,7 +63,7 @@ const NewRequest = () => {
 
   return (
     <>
-      <div className="modal fade" id="newRequestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal fade" id={`editRequest${request._id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
@@ -163,7 +172,7 @@ const NewRequest = () => {
               </ul>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={newRequestHandler}>Создать</button>
+              <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={editRequestHandler} >Изменить</button>
             </div>
           </div>
         </div>
@@ -172,4 +181,4 @@ const NewRequest = () => {
   )
 }
 
-export default NewRequest;
+export default EditRequest;

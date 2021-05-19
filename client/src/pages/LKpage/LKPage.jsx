@@ -5,6 +5,28 @@ import PartnerCard from "../../components/PartnerCard/PartnerCard";
 const LKpage = () => {
 
   const currenUser = useSelector(state => state.user)
+  const allBars = useSelector(state => state.bars)
+  const allBrewers = useSelector(state => state.brews)
+
+  const allFavBars = allBars.map(bar => {
+    if (currenUser?.favourites?.includes(bar._id)) {
+      console.log(bar);
+      return bar
+    }
+  })
+  console.log(allBrewers);
+  let allFavBrewers = [];
+  // const allFavBrewers = allBrewers?.map(brew => {
+  //   if (currenUser?.favourites?.includes(brew._id)) {
+  //     console.log(brew);
+  //     return brew
+  //   }
+  allBrewers?.forEach(el => {
+    if (currenUser?.favourites?.includes(el._id)) {
+      allFavBrewers.push(el);
+    }
+  })
+
 
   return (
     <>
@@ -70,15 +92,23 @@ const LKpage = () => {
             <hr />
             <div className="album py-3">
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {/* Тут начало одной карточки */}
                 {
-                  currenUser?.favourites.map(partner => {
-                    return (
-                      <PartnerCard key={partner._id} partner={partner} />
-                    )
-                  })
+                  currenUser?.favourites?.length && currenUser?.role === 'brew' ?
+                    allFavBars?.map(partner => {
+                      return (
+                        <PartnerCard key={partner?._id} partner={partner} />
+                      )
+                    })
+                    :
+                    currenUser?.favourites?.length && currenUser?.role === 'bar' ?
+                      allFavBrewers?.map(partner => {
+                        return (
+                          <PartnerCard key={partner?._id} partner={partner} />
+                        )
+                      })
+                      :
+                      null
                 }
-                {/* Тут конец одной карточки */}
               </div>
             </div>
           </div>

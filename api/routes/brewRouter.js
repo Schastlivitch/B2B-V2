@@ -10,7 +10,7 @@ const User = require('../db/userModel')
 // Все бары
 router.get("/allbars", async (req, res) => {
   try {
-    const allBars = await User.find({role: 'bar'})
+    const allBars = await User.find({ role: 'bar' })
     const allBarsFront = allBars.map((bar) => {
       return {
         _id: bar._id,
@@ -100,10 +100,10 @@ router.delete("/mybars/:id", (req, res) => {
 });
 
 // Мои пива
-router.get("/beers/:id", async (req, res) => {
+router.get("/beers", async (req, res) => {
   try {
-    const requests = await Beer.find({ brewery: req.params.id })
-    res.send(requests).status(200)
+    const beers = await Beer.find()
+    res.send(beers).status(200)
   } catch (err) {
 
   }
@@ -111,26 +111,39 @@ router.get("/beers/:id", async (req, res) => {
 
 // Мои пива - добавление
 router.post("/beers", async (req, res) => {
-  console.log(req.body);
   try {
-    const newRequest = await Beer.create(req.body)
-    res.json(newRequest).status(200)
+    await Beer.create(req.body)
+    res.sendStatus(200)
   } catch (err) {
-    console.log(err);
+
   }
 
 });
 
 // Мои пива - изменение
-router.patch("/beers/", async (req, res) => {
-  const ID = req.body._id
-  const requetsFromClient = req.body
-  delete requetsFromClient._id
-  delete requetsFromClient.bar
+router.patch("/beers", async (req, res) => {
+  const { _id } = req.body
+  const { title, sort, about, abv, ibu, ebc, ph, 
+    onceSupplyVolume, permanentSupplyVolume,
+    tareVolume, onceSupplyPrice, permanentSupplyPrice, imageUrl
+  } = req.body
   try {
-    await Beer.findByIdAndUpdate(ID, { ...requetsFromClient })
-    const newRequest = await Beer.findById(ID)
-    res.json(newRequest).status(200)
+    const beer = await Beer.findById(_id)
+    beer.title = title
+    beer.sort = sort
+    beer.about = about
+    beer.abv = abv
+    beer.ibu = ibu
+    beer.ebc = ebc
+    beer.ph = ph
+    beer.onceSupplyVolume = onceSupplyVolume
+    beer.permanentSupplyVolume = permanentSupplyVolume
+    beer.tareVolume = tareVolume
+    beer.onceSupplyPrice = onceSupplyPrice
+    beer.permanentSupplyPrice = permanentSupplyPrice
+    beer.imageUrl = imageUrl
+    await beer.save()
+    res.sendStatus(200)
   } catch (err) {
 
   }

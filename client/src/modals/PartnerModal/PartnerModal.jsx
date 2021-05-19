@@ -1,0 +1,117 @@
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavThunk } from "../../redux/thunks/userThunk";
+import { YMaps, Map, Placemark } from 'react-yandex-maps'
+
+
+const PartnerModal = ({ partner }) => {
+
+  const dispatch = useDispatch()
+
+  const currentUser = useSelector(state => state.user)
+  const currentUserID = currentUser?._id
+
+  const addToFavHandler = (userID, partnerID) => {
+    dispatch(addToFavThunk(userID, partnerID))
+  }
+
+  console.log(partner?.location?.longitude, partner?.location?.latitude);
+  const mapData = {
+    center: [Number(partner?.location?.latitude), Number(partner?.location?.longitude) ],
+    zoom: 9,
+  };
+
+  const coordinates = [
+    [Number(partner?.location?.latitude), Number(partner?.location?.longitude)]
+  ];
+
+  return (
+    <>
+      <div class="modal fade" id={`showPartner${partner?._id}`} tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Информация</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <>
+                <div className="container">
+                  <div className="row mb-5">
+                    <div className="col-3 d-flex justify-content-center align-items-center">
+                      <img src="https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png" alt="Аватар" width="200px" height="200px" />
+                    </div>
+                    <div className='col-9'>
+                      <div className="container ms-5">
+                        <h3>{partner?.title}</h3>
+                        <hr />
+                        <div className="row mt-3">
+                          <div className="col-3">
+                            <span>Почта</span>
+                          </div>
+                          <div className="col-8">
+                            <span>{partner?.email}</span>
+                          </div>
+                        </div>
+                        <div className="row mt-3">
+                          <div className="col-3">
+                            <span>Адрес</span>
+                          </div>
+                          <div className="col-8">
+                            <span>{partner?.location?.fullAddress}</span>
+                          </div>
+                        </div>
+                        <div className="row mt-3">
+                          <div className="col-3">
+                            <span>Телефон</span>
+                          </div>
+                          <div className="col-8">
+                            <span>{partner?.contacts?.telephone}</span>
+                          </div>
+                        </div>
+                        <div className="row mt-3">
+                          <div className="col-3">
+                            <span>Telegram</span>
+                          </div>
+                          <div className="col-8">
+                            <span>{partner?.contacts?.telegram}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="container ">
+                      <h3>Описание</h3>
+                      <hr />
+                      <p>{partner?.about}</p>
+
+                    </div>
+                    <div className="container ">
+                      <h3>Расположение</h3>
+                      <hr />
+                      <YMaps >
+                        <Map defaultState={mapData} width="100%">
+                          {coordinates.map(coordinate => <Placemark geometry={coordinate} />)}
+                        </Map>
+                      </YMaps>
+                    </div>
+                  </div>
+                </div>
+              </>
+            </div>
+            <div class="modal-footer">
+              {
+                currentUser?.favourites.includes(partner._id) ?
+                  <button type="button" class="btn btn-outline-secondary">Начать чат</button>
+                  :
+                  <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" onClick={() => addToFavHandler(currentUserID, partner._id)}>Добавить в избранное</button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default PartnerModal

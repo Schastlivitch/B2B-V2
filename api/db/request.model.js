@@ -9,7 +9,8 @@ const requestSchema = mongoose.Schema({
   supplyVolume: String,
   price: Number,
   title: String,
-  about: String
+  about: String,
+  sort: String
 })
 
 const Request = mongoose.model('Request', requestSchema)

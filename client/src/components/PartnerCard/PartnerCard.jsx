@@ -1,3 +1,4 @@
+import PartnerModal from "../../modals/PartnerModal/PartnerModal";
 
 const PartnerCard = ({ partner }) => {
   return (
@@ -6,17 +7,20 @@ const PartnerCard = ({ partner }) => {
         <div className="card shadow-sm">
           <img src="https://static.tildacdn.com/tild6235-3533-4138-b363-666630346432/bage.jpg" alt="" />
           <div className="card-body">
-            <strong>{partner.role}</strong>
-            <p className="card-text">Текст длинной в 93 символа будет помещаться в 2 строки и дальше будет обрезаться с добавление...</p>
+            <strong>{partner?.title}</strong>
+            {/* <p className="card-text">Текст длинной в 93 символа будет помещаться в 2 строки и дальше будет обрезаться с добавление...</p> */}
+            <p className="card-text mt-2 text-muted">{partner?.about.slice(0,125)}...</p>
+
             <div className="d-flex justify-content-between align-items-center">
               <div className="btn-group">
-                <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target={`#b`}>Смотреть</button>
+                <button type="button" className="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target={`#showPartner${partner?._id}`}>Смотреть</button>
               </div>
-              <small><code>Город</code></small>
+              <small><code>{partner?.location.city}</code></small>
             </div>
           </div>
         </div>
       </div>
+      <PartnerModal partner={partner} />
     </>
   );
 }

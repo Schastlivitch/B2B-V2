@@ -10,7 +10,7 @@ const User = require('../db/userModel')
 // Все пивоварни
 router.get("/allbrewers", async (req, res) => {
   try {
-    const allBrews = await User.find({role: 'brew'})
+    const allBrews = await User.find({ role: 'brew' })
     const allBrewsFront = allBrews.map((brew) => {
       return {
         _id: brew._id,
@@ -85,10 +85,10 @@ router.delete("/mybrewers/:id", (req, res) => {
 
 });
 
-// Мои запросы
-router.get("/requests/:id", async (req, res) => {
+// Все запросы
+router.get("/requests", async (req, res) => {
   try {
-    const requests = await Request.find({ bar: req.params.id })
+    const requests = await Request.find()
     res.send(requests).status(200)
   } catch (err) {
 
@@ -97,26 +97,28 @@ router.get("/requests/:id", async (req, res) => {
 
 // Мои запросы - добавление
 router.post("/requests", async (req, res) => {
-  console.log("/requests", req.body);
   try {
-    const newRequest = await Request.create(req.body)
-    res.json(newRequest).status(200)
+    await Request.create(req.body)
+    res.sendStatus(200)
   } catch (err) {
 
   }
-
 });
 
 // Мои запросы - изменение
-router.patch("/requests/", async (req, res) => {
-  const ID = req.body._id
-  const requetsFromClient = req.body
-  delete requetsFromClient._id
-  delete requetsFromClient.bar
+router.patch("/requests", async (req, res) => {
+  const { _id } = req.body
+  const { isPermanentSupply, supplyVolume, price, title, about, sort } = req.body
   try {
-    await Request.findByIdAndUpdate(ID, { ...requetsFromClient })
-    const newRequest = await Request.findById(ID, { new: true }).populate('bar')
-    res.json(newRequest).status(200)
+    const request = await Request.findById(_id)
+    request.isPermanentSupply = isPermanentSupply
+    request.supplyVolume = supplyVolume
+    request.price = price
+    request.title = title
+    request.about = about
+    request.sort = sort
+    await request.save()
+    res.sendStatus(200)
   } catch (err) {
 
   }

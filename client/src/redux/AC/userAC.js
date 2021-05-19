@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER, EDIT_PROFILE } from '../types';
+import { LOGIN_USER, LOGOUT_USER, EDIT_PROFILE, ADD_TO_FAV } from '../types';
 
 export const loginUser = (user) => {
   return {
@@ -19,3 +19,11 @@ export const editProfile = (changes) => {
     payload: changes
   }
 }
+
+export const addToFav = (user) => {
+  return {
+    type: ADD_TO_FAV,
+    payload: user
+  }
+}
+

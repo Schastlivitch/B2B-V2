@@ -73,7 +73,7 @@ const LKedit = () => {
                   <span>{currenUser?.login}</span>
                 </div>
               </div>
-              <div className="row mt-3">
+              <div className="row mt-4">
                 <div className="col-3">
                   <span>Почта</span>
                 </div>
@@ -81,7 +81,7 @@ const LKedit = () => {
                   <span>{currenUser?.email}</span>
                 </div>
               </div>
-              <div className="row mt-3">
+              <div className="row mt-4">
                 <div className="col-3">
                   <span>Адрес</span>
                 </div>

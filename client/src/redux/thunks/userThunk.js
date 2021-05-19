@@ -1,4 +1,4 @@
-import { loginUser, editProfile } from "../AC/userAC"
+import { loginUser, editProfile, addToFav } from "../AC/userAC"
 
 export const authCheckThunk = () => async (dispatch, getState) => {
   const response = await fetch('http://localhost:8080/user/authcheck', {
@@ -25,7 +25,26 @@ export const editProfileThunk = (ID, changes) => async (dispatch, getState) => {
     })
   })
   if (response.status === 200) {
+    const token = await response.json()
+    localStorage.setItem('token', `${token.accessToken}`)
     dispatch(editProfile(changes))
+  }
+}
+
+export const addToFavThunk = (userID, partnerID) => async (dispatch, getState) => {
+  const response = await fetch(`http://localhost:8080/user/addtofav`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userID, partnerID
+    })
+  })
+  if (response.status === 200) {
+    const token = await response.json()
+    localStorage.setItem('token', `${token.accessToken}`)
+    dispatch(addToFav(partnerID))
   }
 }
 

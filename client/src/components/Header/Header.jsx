@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
+import GetBeer from '../../modals/GetBeer/GetBeer'
 import { logoutUser } from '../../redux/AC/userAC'
 
 const Header = () => {
@@ -7,12 +9,15 @@ const Header = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const currenUser = useSelector(state => state.user)
+  const allBeers = useSelector(state => state.beers)
 
   const signoutUser = () => {
     dispatch(logoutUser())
     localStorage.removeItem('token')
     history.push('/')
   }
+
+  const [search, setSearch] = useState('')
 
   return (
     <>
@@ -24,14 +29,14 @@ const Header = () => {
                 <>
                   <li className="nav-item"><Link to="/" className="nav-link link-dark px-2">Главная</Link></li>
                   <li className="nav-item"><Link to="/brewers" className="nav-link link-dark px-2">Пивоварни</Link></li>
-                  <li className="nav-item"><Link to="/beers" className="nav-link link-dark px-2">Все пиво</Link></li>
+                  <li className="nav-item"><Link to="/allbeers" className="nav-link link-dark px-2">Все пиво</Link></li>
                   <li className="nav-item"><Link to="/info" className="nav-link link-dark px-2">О нас</Link></li>
                 </>
                 :
                 <>
                   <li className="nav-item"><Link to="/" className="nav-link link-dark px-2">Главная</Link></li>
                   <li className="nav-item"><Link to="/bars" className="nav-link link-dark px-2">Бары</Link></li>
-                  <li className="nav-item"><Link to="/requests" className="nav-link link-dark px-2">Все запросы</Link></li>
+                  <li className="nav-item"><Link to="/allrequests" className="nav-link link-dark px-2">Все запросы</Link></li>
                   <li className="nav-item"><Link to="/info" className="nav-link link-dark px-2">О нас</Link></li>
                 </>
             }
@@ -84,7 +89,30 @@ const Header = () => {
             }
           </div>
           <form className="col-12 col-lg-auto mb-3 mb-lg-0">
-            <input type="search" className="form-control" placeholder="Поиск..." aria-label="Search" />
+            <input type="search" className="form-control" placeholder="Поиск..." aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} data-bs-toggle="dropdown" />
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ width: "274px" }}>
+              {
+                search.length ? allBeers.filter(value => {
+                  if (search === '') {
+                    return value.title
+                  }
+                  else if (value.title.toLowerCase().includes(search.toLowerCase())) {
+                    return value.title
+                  }
+                }).map(el => {
+                  return (
+                    <>
+                    <li className='dropdown-item' onClick={() => setSearch('')}>
+                      <button className="btn" data-bs-toggle="modal" data-bs-target={`#getBeerModal${el._id}`}>{el.title}</button>
+                    </li>
+                    <GetBeer beer={el} />
+                    </>
+                  )
+                })
+                  :
+                  <li><span class="dropdown-item" >Введите название пива</span></li>
+              }
+            </ul>
           </form>
         </div>
       </header>

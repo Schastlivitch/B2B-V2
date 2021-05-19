@@ -110,16 +110,6 @@ router.get('/authcheck', authenticateToken, async (req, res) => {
   res.json(req.user)
 })
 
-// Личный кабинет
-// router.get("/lk/:id", async (req, res) => {
-//   try {
-//     const currentUser = await User.findById(req.params.id)
-//     delete currentUser.password
-//     res.sendStatus(200)
-//   } catch (err) {
-
-//   }
-// });
 
 // Личный кабинет - редактирование
 router.patch("/lk/:id", async (req, res) => {
@@ -131,11 +121,51 @@ router.patch("/lk/:id", async (req, res) => {
     currentUser.contacts = changes.contacts
     currentUser.title = changes.title
     currentUser.about = changes.about
+    const currentUserFront = {
+      _id: currentUser._id,
+      location: currentUser.location,
+      contacts: currentUser.contacts,
+      title: currentUser.title,
+      about: currentUser.about,
+      favourites: currentUser.favourites,
+      login: currentUser.login,
+      email: currentUser.email,
+      role: currentUser.role
+    }
+    const userToken = { ...currentUserFront }
+    const accessToken = generateAccessToken(userToken)
     await currentUser.save()
-    res.sendStatus(200)
+    res.send({ accessToken: accessToken }).status(200)
   } catch (err) {
     res.sendStatus(400)
   }
 });
 
+router.post('/addtofav', async (req, res) => {
+  const {userID, partnerID} = req.body
+  try {
+    const currentUser = await User.findById(userID)
+    currentUser.favourites.push(partnerID)
+    const currentUserFront = {
+      _id: currentUser._id,
+      location: currentUser.location,
+      contacts: currentUser.contacts,
+      title: currentUser.title,
+      about: currentUser.about,
+      favourites: currentUser.favourites,
+      login: currentUser.login,
+      email: currentUser.email,
+      role: currentUser.role
+    }
+    const userToken = { ...currentUserFront }
+    const accessToken = generateAccessToken(userToken)
+    await currentUser.save()
+    console.log(200);
+    res.send({ accessToken: accessToken }).status(200)
+  } catch (err) {
+
+  }
+})
+
 module.exports = router;
+
