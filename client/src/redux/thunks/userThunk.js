@@ -14,20 +14,34 @@ export const authCheckThunk = () => async (dispatch, getState) => {
   }
 }
 
-export const editProfileThunk = (ID, changes) => async (dispatch, getState) => {
+export const editProfileThunk = (ID, fileAvatar, changes) => async (dispatch, getState) => {
   const response = await fetch(`http://localhost:8080/user/lk/${ID}`, {
     method: 'PATCH',
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      changes
+      changes,
     })
   })
   if (response.status === 200) {
-    const token = await response.json()
-    localStorage.setItem('token', `${token.accessToken}`)
-    dispatch(editProfile(changes))
+    if (fileAvatar) {
+      const formData = new FormData()
+      formData.append('avatar', fileAvatar, ID)
+      const responseAvatar = await fetch('http://localhost:8080/user/setAvatar', {
+        method: 'PATCH',
+        body: formData
+      })
+      if (responseAvatar.status === 200) {
+        const token = await response.json()
+        localStorage.setItem('token', `${token.accessToken}`)
+        dispatch(editProfile(changes))
+      }
+    } else {
+      const token = await response.json()
+      localStorage.setItem('token', `${token.accessToken}`)
+      dispatch(editProfile(changes))
+    }
   }
 }
 

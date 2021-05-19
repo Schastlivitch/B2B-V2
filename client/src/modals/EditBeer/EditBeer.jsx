@@ -4,7 +4,7 @@ import { editBeerThunk } from "../../redux/thunks/beerThunk";
 
 
 const EditBeer = ({ beer }) => {
-
+  console.log(beer, 'beer======================>')
   const dispatch = useDispatch()
   const beerID = beer._id
 
@@ -45,7 +45,7 @@ const EditBeer = ({ beer }) => {
     setSort(e.target.value);
   };
   const imgHandler = (e) => {
-    setImg(e.target.value);
+    setImg(e.target.files[0]);
   };
   const abvHandler = (e) => {
     setAbv(e.target.value);
@@ -79,12 +79,12 @@ const EditBeer = ({ beer }) => {
   };
 
   const editBeerHandler = async () => {
-    dispatch(editBeerThunk({ ...beer,
+    dispatch(editBeerThunk(img, { ...beer,
       title,
-      imageUrl: img,
+      imageUrl: `/images/beers/${title}.jpg`,
       sort,
-      abv,
-      ibu,
+      abv: Number(abv),
+      ibu: Number(ibu),
       ebc,
       ph,
       about,
@@ -280,6 +280,21 @@ const EditBeer = ({ beer }) => {
                         placeholder=""
                         value={permanentSupplyPrice}
                         onChange={permanentSupplyPriceHandler}
+                      />
+                    </div>
+                  </div>
+                </li>
+                <li>
+                <div className="row mt-4">
+                    <div className="col-6 d-flex align-items-center">
+                      <span>Изображение </span>
+                    </div>
+                    <div class="custom-file col-6">
+                      <input
+                        type="file"
+                        class="form-control"
+                        id="inputGroupFile04"
+                        onChange={imgHandler}
                       />
                     </div>
                   </div>

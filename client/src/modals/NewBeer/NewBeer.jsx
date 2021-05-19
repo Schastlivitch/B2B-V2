@@ -1,34 +1,33 @@
-import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { addNewBeerThunk } from "../../redux/thunks/beerThunk"
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewBeerThunk } from "../../redux/thunks/beerThunk";
 
 const NewBeer = () => {
-
-  const dispatch = useDispatch()
-  const userID = useSelector(state => state.user._id)
-
-  const [title, setTitle] = useState('');
-  const [sort, setSort] = useState('');
-  const [img, setImg] = useState('');
-  const [abv, setAbv] = useState('');
-  const [ibu, setIbu] = useState('');
-  const [ebc, setEbc] = useState('');
-  const [ph, setPh] = useState('');
-  const [about, setAbout] = useState('');
-  const [onceSupplyVolume, setOnceSupplyVolume] = useState('');
-  const [permanentSupplyVolume, setPermanentSupplyVolume] = useState('');
-  const [tareVolume, setTareVolume] = useState('');
-  const [onceSupplyPrice, setOnceSupplyPrice] = useState('');
-  const [permanentSupplyPrice, setPermanentSupplyPrice] = useState('');
+  const dispatch = useDispatch();
+  const userID = useSelector((state) => state.user._id);
+  
+  const [title, setTitle] = useState("");
+  const [sort, setSort] = useState("");
+  const [img, setImg] = useState("");
+  const [abv, setAbv] = useState("");
+  const [ibu, setIbu] = useState("");
+  const [ebc, setEbc] = useState("");
+  const [ph, setPh] = useState("");
+  const [about, setAbout] = useState("");
+  const [onceSupplyVolume, setOnceSupplyVolume] = useState("");
+  const [permanentSupplyVolume, setPermanentSupplyVolume] = useState("");
+  const [tareVolume, setTareVolume] = useState("");
+  const [onceSupplyPrice, setOnceSupplyPrice] = useState("");
+  const [permanentSupplyPrice, setPermanentSupplyPrice] = useState("");
 
   const titleHandler = (e) => {
-   setTitle(e.target.value);
+    setTitle(e.target.value);
   };
   const sortHandler = (e) => {
     setSort(e.target.value);
   };
   const imgHandler = (e) => {
-    setImg(e.target.value);
+    setImg(e.target.files[0]);
   };
   const abvHandler = (e) => {
     setAbv(e.target.value);
@@ -61,46 +60,61 @@ const NewBeer = () => {
     setPermanentSupplyPrice(e.target.value);
   };
 
-
   const newBeerHandler = async () => {
-    dispatch(addNewBeerThunk({
-      brewery: userID,
-      title,
-      imageUrl: img,
-      sort,
-      abv: Number(abv),
-      ibu: Number(ibu),
-      ebc,
-      ph,
-      about,
-      onceSupplyVolume,
-      permanentSupplyVolume,
-      tareVolume,
-      onceSupplyPrice,
-      permanentSupplyPrice,
-    }));
-    setTitle('');
-    setSort('');
+    dispatch(
+      addNewBeerThunk(img, {
+        brewery: userID,
+        title,
+        imageUrl: `/images/beers/${title}.jpg`,
+        sort,
+        abv: Number(abv),
+        ibu: Number(ibu),
+        ebc,
+        ph,
+        about,
+        onceSupplyVolume,
+        permanentSupplyVolume,
+        tareVolume,
+        onceSupplyPrice,
+        permanentSupplyPrice,
+      })
+    );
+    setTitle("");
+    setSort("");
+    setImg("");
+    setAbv("");
+    setIbu("");
+    setEbc("");
+    setPh("");
+    setAbout("");
+    setOnceSupplyVolume("");
+    setTareVolume("");
+    setOnceSupplyPrice("");
+    setPermanentSupplyPrice("");
     setImg('');
-    setAbv('');
-    setIbu('');
-    setEbc('');
-    setPh('');
-    setAbout('');
-    setOnceSupplyVolume('');
-    setTareVolume('');
-    setOnceSupplyPrice('');
-    setPermanentSupplyPrice('');
-  }
+  };
 
   return (
     <>
-      <div className="modal fade" id="newBeerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div
+        className="modal fade"
+        id="newBeerModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">Новое пиво</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h5 className="modal-title" id="exampleModalLabel">
+                Новое пиво
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div className="modal-body">
               <ul className="list-unstyled mt-3 mb-4">
@@ -303,12 +317,11 @@ const NewBeer = () => {
                     <div className="col-3 d-flex align-items-center">
                       <span>Изображение </span>
                     </div>
-                    <div className="col-9">
+                    <div class="custom-file col-9">
                       <input
-                        type="text"
-                        className="form-control"
-                        placeholder=""
-                        value={img}
+                        type="file"
+                        class="form-control"
+                        id="inputGroupFile04"
                         onChange={imgHandler}
                       />
                     </div>
@@ -317,13 +330,20 @@ const NewBeer = () => {
               </ul>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={newBeerHandler}>Создать</button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-dismiss="modal"
+                onClick={newBeerHandler}
+              >
+                Создать
+              </button>
             </div>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default NewBeer;

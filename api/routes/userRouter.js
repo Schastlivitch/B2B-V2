@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 const User = require("../db/userModel");
 const mailer = require('../nodemailer/nodemailer')
-
+const fs = require('fs')
 const secretKey = 'secret'
 
 function generateAccessToken(user) {
@@ -63,7 +63,8 @@ router.post('/checkEmail', async (req, res) => {
         favourites: currentUser.favourites,
         login: currentUser.login,
         email: currentUser.email,
-        role: currentUser.role
+        role: currentUser.role,
+        imageUrl: currentUser.imageUrl
       }
       const userToken = { ...currentUserFront }
       const accessToken = generateAccessToken(userToken)
@@ -93,7 +94,8 @@ router.post("/signin", async (req, res) => {
           favourites: currentUser.favourites,
           login: currentUser.login,
           email: currentUser.email,
-          role: currentUser.role
+          role: currentUser.role,
+          imageUrl: currentUser.imageUrl
         }
         const userToken = { ...currentUserFront }
         const accessToken = generateAccessToken(userToken)
@@ -121,6 +123,7 @@ router.patch("/lk/:id", async (req, res) => {
     currentUser.contacts = changes.contacts
     currentUser.title = changes.title
     currentUser.about = changes.about
+    currentUser.imageUrl = changes.imageUrl
     const currentUserFront = {
       _id: currentUser._id,
       location: currentUser.location,
@@ -130,7 +133,8 @@ router.patch("/lk/:id", async (req, res) => {
       favourites: currentUser.favourites,
       login: currentUser.login,
       email: currentUser.email,
-      role: currentUser.role
+      role: currentUser.role,
+      imageUrl: currentUser.imageUrl
     }
     const userToken = { ...currentUserFront }
     const accessToken = generateAccessToken(userToken)
@@ -155,7 +159,8 @@ router.post('/addtofav', async (req, res) => {
       favourites: currentUser.favourites,
       login: currentUser.login,
       email: currentUser.email,
-      role: currentUser.role
+      role: currentUser.role,
+      imageUrl: currentUser.imageUrl
     }
     const userToken = { ...currentUserFront }
     const accessToken = generateAccessToken(userToken)
@@ -164,6 +169,16 @@ router.post('/addtofav', async (req, res) => {
     res.send({ accessToken: accessToken }).status(200)
   } catch (err) {
 
+  }
+})
+
+// Добавление аватарки в личном кабинете
+router.patch('/setAvatar', (req, res) => {
+  try {
+    fs.writeFileSync(`../client/public/images/avatars/${req.files.avatar.name}.jpg`, req.files.avatar.data)
+    res.sendStatus(200)
+  } catch(err) {
+    res.sendStatus(400)
   }
 })
 
