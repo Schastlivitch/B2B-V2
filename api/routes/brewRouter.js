@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const Beer = require("../db/beer.model");
 const Request = require("../db/request.model");
 const User = require('../db/userModel')
-
+const fs = require('fs')
 
 
 
@@ -21,7 +21,8 @@ router.get("/allbars", async (req, res) => {
         favourites: bar.favourites,
         login: bar.login,
         email: bar.email,
-        role: bar.role
+        role: bar.role,
+        imageUrl: bar.imageUrl
       }
     })
     res.send(allBarsFront).status(200)
@@ -159,4 +160,14 @@ router.delete("/beers/:id", async (req, res) => {
   }
 });
 
+// Добавление изображения пива
+router.patch('/setBeerImage', (req, res) => {
+  console.log(req.files)
+  try {
+    fs.writeFileSync(`../client/public/images/beers/${req.files.beerImg.name}.jpg`, req.files.beerImg.data)
+    res.sendStatus(200)
+  } catch(err) {
+    res.sendStatus(400)
+  }
+})
 module.exports = router;

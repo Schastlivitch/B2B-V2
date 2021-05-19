@@ -1,19 +1,17 @@
 import { useSelector } from "react-redux";
 import PartnerCard from "../../components/PartnerCard/PartnerCard";
 
-
 const LKpage = () => {
+  const currenUser = useSelector((state) => state.user);
+  const allBars = useSelector((state) => state.bars);
+  const allBrewers = useSelector((state) => state.brews);
 
-  const currenUser = useSelector(state => state.user)
-  const allBars = useSelector(state => state.bars)
-  const allBrewers = useSelector(state => state.brews)
-
-  const allFavBars = allBars.map(bar => {
+  const allFavBars = allBars.map((bar) => {
     if (currenUser?.favourites?.includes(bar._id)) {
       console.log(bar);
-      return bar
+      return bar;
     }
-  })
+  });
   console.log(allBrewers);
   let allFavBrewers = [];
   // const allFavBrewers = allBrewers?.map(brew => {
@@ -21,21 +19,26 @@ const LKpage = () => {
   //     console.log(brew);
   //     return brew
   //   }
-  allBrewers?.forEach(el => {
+  allBrewers?.forEach((el) => {
     if (currenUser?.favourites?.includes(el._id)) {
       allFavBrewers.push(el);
     }
-  })
-
+  });
 
   return (
     <>
       <div className="container">
         <div className="row mb-5">
           <div className="col-3 d-flex justify-content-center align-items-center">
-            <img src="https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png" alt="Аватар" width="300px" height="300px" />
+            <img
+              src={currenUser?.imageUrl}
+              alt="https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png"
+              width="300px"
+              height="300px"
+              style={{borderRadius: '50%'}}
+            />
           </div>
-          <div className='col-9'>
+          <div className="col-9">
             <div className="container ms-5">
               <h3>{currenUser?.title}</h3>
               <hr />
@@ -92,31 +95,26 @@ const LKpage = () => {
             <hr />
             <div className="album py-3">
               <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                {
-                  currenUser?.favourites?.length && currenUser?.role === 'brew' ?
-                    allFavBars?.map(partner => {
+                {currenUser?.favourites?.length && currenUser?.role === "brew"
+                  ? allFavBars?.map((partner) => {
                       return (
                         <PartnerCard key={partner?._id} partner={partner} />
-                      )
+                      );
                     })
-                    :
-                    currenUser?.favourites?.length && currenUser?.role === 'bar' ?
-                      allFavBrewers?.map(partner => {
-                        return (
-                          <PartnerCard key={partner?._id} partner={partner} />
-                        )
-                      })
-                      :
-                      null
-                }
+                  : currenUser?.favourites?.length && currenUser?.role === "bar"
+                  ? allFavBrewers?.map((partner) => {
+                      return (
+                        <PartnerCard key={partner?._id} partner={partner} />
+                      );
+                    })
+                  : null}
               </div>
             </div>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default LKpage;
-

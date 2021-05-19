@@ -50,7 +50,11 @@ const userSchema = mongoose.Schema({
     }
   },
   checkEmail: String,
-  role: String
+  role: String,
+  imageUrl: {
+    type: String,
+    default: ''
+  }
 });
 
 const User = mongoose.model('User', userSchema)
