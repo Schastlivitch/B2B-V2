@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavThunk } from "../../redux/thunks/userThunk";
 import { YMaps, Map, Placemark } from 'react-yandex-maps'
+import Chat from "../Chat/Chat";
 
 
 const PartnerModal = ({ partner }) => {
@@ -102,7 +103,7 @@ const PartnerModal = ({ partner }) => {
             <div class="modal-footer">
               {
                 currentUser?.favourites.includes(partner._id) ?
-                  <button type="button" class="btn btn-outline-secondary">Начать чат</button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" data-bs-target={`#getChat${partner._id}`} data-bs-toggle="modal" >Начать чат</button>
                   :
                   <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" onClick={() => addToFavHandler(currentUserID, partner._id)}>Добавить в избранное</button>
               }
@@ -110,6 +111,7 @@ const PartnerModal = ({ partner }) => {
           </div>
         </div>
       </div>
+      <Chat partner={partner} />
     </>
   );
 }
