@@ -30,6 +30,7 @@ const Header = () => {
                   <li className="nav-item"><Link to="/" className="nav-link link-dark px-2">Главная</Link></li>
                   <li className="nav-item"><Link to="/brewers" className="nav-link link-dark px-2">Пивоварни</Link></li>
                   <li className="nav-item"><Link to="/allbeers" className="nav-link link-dark px-2">Все пиво</Link></li>
+                  <li className="nav-item"><Link to="/chats" className="nav-link link-dark px-2">Чаты</Link></li>
                   <li className="nav-item"><Link to="/info" className="nav-link link-dark px-2">О нас</Link></li>
                 </>
                 :
@@ -37,6 +38,7 @@ const Header = () => {
                   <li className="nav-item"><Link to="/" className="nav-link link-dark px-2">Главная</Link></li>
                   <li className="nav-item"><Link to="/bars" className="nav-link link-dark px-2">Бары</Link></li>
                   <li className="nav-item"><Link to="/allrequests" className="nav-link link-dark px-2">Все запросы</Link></li>
+                  <li className="nav-item"><Link to="/chats" className="nav-link link-dark px-2">Чаты</Link></li>
                   <li className="nav-item"><Link to="/info" className="nav-link link-dark px-2">О нас</Link></li>
                 </>
             }
