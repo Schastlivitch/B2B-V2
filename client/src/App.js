@@ -8,6 +8,7 @@ import Signin from "./modals/Signin/Signin";
 import Signup from "./modals/Signup/Signup";
 import AllBeers from "./pages/AllBeers/AllBeers";
 import AllRequests from "./pages/AllRequests/AllRequests";
+import ChatsPage from "./pages/ChatsPage/ChatsPage";
 import LKedit from "./pages/LKedit/LKedit";
 import LKpage from "./pages/LKpage/LKPage";
 import MyStaff from "./pages/MyStaff/MyStaff";
@@ -80,6 +81,11 @@ function App() {
           <Route exact path="/mystaff">
             <Header />
             <MyStaff />
+          </Route>
+
+          <Route exact path="/chats">
+            <Header />
+            <ChatsPage />
           </Route>
 
         </Switch>

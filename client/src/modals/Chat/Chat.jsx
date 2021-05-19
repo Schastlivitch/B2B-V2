@@ -42,6 +42,8 @@ const Chat = ({ partner }) => {
                     messages.map(message => {
                       return (
                         <>
+                        {
+                          currentUser?._id == message?.senderID && partner?._id == message?.recieverID || currentUser?._id == message?.recieverID && partner?._id == message?.senderID ?
                           <li className={message.senderID === currentUser?._id ? 'out' : 'in'}>
                             <div className="chat-body">
                               <div className={message.senderID === currentUser?._id ? "chat-message d-flex flex-row-reverse" : "chat-message d-flex flex-row"}>
@@ -49,6 +51,9 @@ const Chat = ({ partner }) => {
                               </div>
                             </div>
                           </li>
+                          :
+                          null
+                        }
                         </>
                       )
                     })
