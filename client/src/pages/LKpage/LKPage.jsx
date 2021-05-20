@@ -26,7 +26,7 @@ const LKpage = () => {
   });
 
   return (
-    <>
+    <div style={{backgroundImage:'url(images/background1.jpg)', height:'100vh'}} className="pt-4">
       <div className="container">
         <div className="row mb-5">
           <div className="col-5 d-flex justify-content-center align-items-center">
@@ -113,7 +113,7 @@ const LKpage = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -28,7 +28,7 @@ const ChatsPage = () => {
   }
 
   return (
-    <>
+    <div style={{backgroundImage:'url(images/background1.jpg)', height:'100vh'}} className="pt-4">
       <div className="container">
         <ul className="list-unstyled">
           {
@@ -54,7 +54,7 @@ const ChatsPage = () => {
           <button className="btn" onClick={sendMessage}>Отправить</button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

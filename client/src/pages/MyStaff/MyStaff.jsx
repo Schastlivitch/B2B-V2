@@ -12,7 +12,7 @@ const MyStaff = () => {
   const currenUserBeers = allBeers?.filter((beer) => currenUser?._id === beer.brewery)
 
   return (
-    <>
+    <div style={{backgroundImage:'url(images/background1.jpg)', height:'100vh'}} className="pt-4">
       <div className="container">
         <div className="row row-cols-1 row-cols-md-3 mb-3">
           {
@@ -33,7 +33,7 @@ const MyStaff = () => {
 
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
