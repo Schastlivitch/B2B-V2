@@ -1,6 +1,6 @@
 import { getAllBeers, addNewBeer, editBeer, deleteBeer } from "../AC/beerAC";
 
-export const addNewBeerThunk = (img, beer) => async (dispatch, getState) => {
+export const addNewBeerThunk = (img, randomNum, beer) => async (dispatch, getState) => {
   console.log(img, 'IMAGE===================================>')
   const response = await fetch("http://localhost:8080/brew/beers", {
     method: "POST",
@@ -12,7 +12,7 @@ export const addNewBeerThunk = (img, beer) => async (dispatch, getState) => {
   if (response.status === 200) {
     if (img) {
       const formData = new FormData();
-      formData.append("beerImg", img, beer.title);
+      formData.append("beerImg", img, randomNum);
       const responseBeerImg = await fetch("http://localhost:8080/brew/setBeerImage", {
         method: "PATCH",
         body: formData,
@@ -51,7 +51,7 @@ export const deleteBeerThunk = (beerID) => async (dispatch, getState) => {
   }
 };
 
-export const editBeerThunk = (img, beer) => async (dispatch, getState) => {
+export const editBeerThunk = (img, randomNum, beer) => async (dispatch, getState) => {
   const response = await fetch(`http://localhost:8080/brew/beers`, {
     method: "PATCH",
     headers: {
@@ -61,8 +61,9 @@ export const editBeerThunk = (img, beer) => async (dispatch, getState) => {
   });
   if (response.status === 200) {
     if (img) {
+      console.log(img)
       const formData = new FormData();
-      formData.append("beerImg", img, beer.title);
+      formData.append("beerImg", img, randomNum);
       const responseBeerImg = await fetch("http://localhost:8080/brew/setBeerImage", {
         method: "PATCH",
         body: formData,

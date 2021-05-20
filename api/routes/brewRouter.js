@@ -164,7 +164,7 @@ router.delete("/beers/:id", async (req, res) => {
 router.patch('/setBeerImage', (req, res) => {
   console.log(req.files)
   try {
-    fs.writeFileSync(`../client/public/images/beers/${req.files.beerImg.name}.jpg`, req.files.beerImg.data)
+    fs.writeFileSync(`./public/images/beers/${req.files.beerImg.name}.jpg`, req.files.beerImg.data)
     res.sendStatus(200)
   } catch(err) {
     res.sendStatus(400)

@@ -175,7 +175,7 @@ router.post('/addtofav', async (req, res) => {
 // Добавление аватарки в личном кабинете
 router.patch('/setAvatar', (req, res) => {
   try {
-    fs.writeFileSync(`../client/public/images/avatars/${req.files.avatar.name}.jpg`, req.files.avatar.data)
+    fs.writeFileSync(`./public/images/avatars/${req.files.avatar.name}.jpg`, req.files.avatar.data)
     res.sendStatus(200)
   } catch(err) {
     res.sendStatus(400)
@@ -183,4 +183,3 @@ router.patch('/setAvatar', (req, res) => {
 })
 
 module.exports = router;
-
