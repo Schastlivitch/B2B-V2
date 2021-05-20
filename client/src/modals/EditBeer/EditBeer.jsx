@@ -78,10 +78,21 @@ const EditBeer = ({ beer }) => {
     setPermanentSupplyPrice(e.target.value);
   };
 
+  const randomNum = Math.floor(Math.random() * 1000)
+
+  function checkBeerImage (img, random) {
+    if (img) {
+      return `http://localhost:8080/images/beers/${random}.jpg`
+    } else {
+      return beer?.imageUrl
+    }
+  }
+
   const editBeerHandler = async () => {
-    dispatch(editBeerThunk(img, { ...beer,
+    dispatch(editBeerThunk(img, randomNum,  { ...beer,
       title,
-      imageUrl: `/images/beers/${title}.jpg`,
+      // imageUrl: `/images/beers/${randomNum}.jpg`,
+      imageUrl: checkBeerImage(img, randomNum),
       sort,
       abv: Number(abv),
       ibu: Number(ibu),

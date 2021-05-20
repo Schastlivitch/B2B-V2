@@ -14,7 +14,7 @@ export const authCheckThunk = () => async (dispatch, getState) => {
   }
 }
 
-export const editProfileThunk = (ID, fileAvatar, changes) => async (dispatch, getState) => {
+export const editProfileThunk = (ID, fileAvatar, changes, randomNum) => async (dispatch, getState) => {
   const response = await fetch(`http://localhost:8080/user/lk/${ID}`, {
     method: 'PATCH',
     headers: {
@@ -27,7 +27,7 @@ export const editProfileThunk = (ID, fileAvatar, changes) => async (dispatch, ge
   if (response.status === 200) {
     if (fileAvatar) {
       const formData = new FormData()
-      formData.append('avatar', fileAvatar, ID)
+      formData.append('avatar', fileAvatar, randomNum)
       const responseAvatar = await fetch('http://localhost:8080/user/setAvatar', {
         method: 'PATCH',
         body: formData

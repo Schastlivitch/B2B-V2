@@ -47,11 +47,20 @@ const LKedit = () => {
   const avatarHandler = (e) => {
     setAvatar(e.target.files[0]);
   };
+  const randomNum = Math.floor(Math.random() * 1000)
 
   const submitHandler = (id, fileAvatar, changes) => {
-    dispatch(editProfileThunk(id, fileAvatar, changes));
+    dispatch(editProfileThunk(ID, fileAvatar, changes, randomNum));
     history.push("/lk");
   };
+
+  function checkAvatar (img, random){
+    if (img) {
+      return `http://localhost:8080/images/avatars/${random}.jpg`
+    } else {
+      return currenUser?.imageUrl
+    }
+  }
 
   return (
     <>
@@ -169,7 +178,8 @@ const LKedit = () => {
           className="btn btn-outline-success my-4"
           onClick={() =>
             submitHandler(ID, avatar, {
-              imageUrl: `images/avatars/${ID}.jpg`,
+              // imageUrl: `http://localhost:8080/images/avatars/${randomNum}.jpg`,
+              imageUrl: checkAvatar(avatar, randomNum),
               title,
               about,
               location: {
@@ -188,5 +198,6 @@ const LKedit = () => {
     </>
   );
 };
+
 
 export default LKedit;

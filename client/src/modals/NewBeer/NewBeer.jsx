@@ -61,11 +61,12 @@ const NewBeer = () => {
   };
 
   const newBeerHandler = async () => {
+    const randomNum = Math.floor(Math.random() * 300)
     dispatch(
-      addNewBeerThunk(img, {
+      addNewBeerThunk(img, randomNum, {
         brewery: userID,
         title,
-        imageUrl: `/images/beers/${title}.jpg`,
+        imageUrl: `/images/beers/${randomNum}.jpg`,
         sort,
         abv: Number(abv),
         ibu: Number(ibu),
