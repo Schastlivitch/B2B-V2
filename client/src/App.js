@@ -10,6 +10,7 @@ import About from "./pages/About/About";
 import AllBeers from "./pages/AllBeers/AllBeers";
 import AllRequests from "./pages/AllRequests/AllRequests";
 import ChatsPage from "./pages/ChatsPage/ChatsPage";
+import Home from "./pages/Home/Home";
 import LKedit from "./pages/LKedit/LKedit";
 import LKpage from "./pages/LKpage/LKPage";
 import MyStaff from "./pages/MyStaff/MyStaff";
@@ -41,6 +42,7 @@ function App() {
 
           <Route exact path="/">
             <Header />
+            <Home />
           </Route>
 
           {

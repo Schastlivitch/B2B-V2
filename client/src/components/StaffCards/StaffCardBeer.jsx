@@ -60,7 +60,7 @@ const StaffCardBeer = ({ beer }) => {
                   </li>
                 </div>
                 <div className='col-5 d-flex align-items-center justify-content-center'>
-                <img src={beer?.imageUrl} alt="" width='100px' height='auto' />
+                <img src={beer?.imageUrl} alt="" width='100x' height='auto' />
 
                 </div>
               </div>

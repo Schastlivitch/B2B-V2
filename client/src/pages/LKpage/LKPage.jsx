@@ -35,7 +35,6 @@ const LKpage = () => {
               alt="avatar"
               width="504"
               height="240px"
-              
             />
           </div>
           <div className="col-7">
