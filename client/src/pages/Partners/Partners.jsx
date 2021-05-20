@@ -12,7 +12,7 @@ const Partners = () => {
 
 
   return (
-    <>
+    <div style={{backgroundImage:'url(images/background1.jpg)', height:'100vh'}} className="pt-4">
       <div className="album py-5">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -29,7 +29,7 @@ const Partners = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

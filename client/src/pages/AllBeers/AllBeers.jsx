@@ -39,7 +39,7 @@ const AllBeers = () => {
   console.log(filtredBeers);
 
   return (
-    <>
+    <div style={{backgroundImage:'url(images/background1.jpg)', height:'100vh'}} className="pt-4">
       <div className="container">
         <div id="mobile-filter" className="row">
           <div className='col-2'>
@@ -77,7 +77,7 @@ const AllBeers = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
