@@ -6,6 +6,7 @@ import NewBeer from "./modals/NewBeer/NewBeer";
 import NewRequest from "./modals/NewRequest/NewRequest";
 import Signin from "./modals/Signin/Signin";
 import Signup from "./modals/Signup/Signup";
+import About from "./pages/About/About";
 import AllBeers from "./pages/AllBeers/AllBeers";
 import AllRequests from "./pages/AllRequests/AllRequests";
 import ChatsPage from "./pages/ChatsPage/ChatsPage";
@@ -86,6 +87,11 @@ function App() {
           <Route exact path="/chats">
             <Header />
             <ChatsPage />
+          </Route>
+
+          <Route exact path="/info">
+            <Header />
+            <About />
           </Route>
 
         </Switch>

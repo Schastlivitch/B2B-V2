@@ -53,7 +53,7 @@ const userSchema = mongoose.Schema({
   role: String,
   imageUrl: {
     type: String,
-    default: 'https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png'
+    default: 'http://localhost:8080/images/avaplaceholder.jpg'
   }
 });
 

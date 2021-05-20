@@ -39,28 +39,30 @@ const AllBeers = () => {
   console.log(filtredBeers);
 
   return (
-    <div style={{backgroundImage:'url(images/background1.jpg)', height:'100vh'}} className="pt-4">
+    <div style={{ backgroundImage: 'url(images/background1.jpg)', height: '100vh' }} className="pt-4">
       <div className="container">
         <div id="mobile-filter" className="row">
           <div className='col-2'>
-            <div className="py-3">
-              <h5 className="font-weight-bold">Сорт пива</h5>
-              <div class="form-check">
-                <form ref={myFormRef} onChange={sortFilterHandler}>
-                  {
-                    uniqueBeersSorts?.map(sort => {
-                      return (
-                        <>
-                          <div className="mt-3">
-                            <input class="form-check-input" type="checkbox" name={sort} value={sort} />
-                            <label class="form-check-label" for="flexCheckDefault">{sort}</label>
-                            <br />
-                          </div>
-                        </>
-                      )
-                    })
-                  }
-                </form>
+            <div className="py-2 card rounded-3 shadow-sm">
+              <div className="card-body">
+                <h5 className="font-weight-bold">Сорт пива</h5>
+                <div class="form-check">
+                  <form ref={myFormRef} onChange={sortFilterHandler}>
+                    {
+                      uniqueBeersSorts?.map(sort => {
+                        return (
+                          <>
+                            <div className="mt-3">
+                              <input class="form-check-input" type="checkbox" name={sort} value={sort} />
+                              <label class="form-check-label" for="flexCheckDefault">{sort}</label>
+                              <br />
+                            </div>
+                          </>
+                        )
+                      })
+                    }
+                  </form>
+                </div>
               </div>
             </div>
           </div>
