@@ -20,35 +20,55 @@ const StaffCardBeer = ({ beer }) => {
             <h4 className="my-0 fw-normal">{beer.title}</h4>
           </div>
           <div className="card-body">
-            <h4 className="card-title pricing-card-title">{beer.sort}</h4>
 
             {/* <div className="beerContainer" style={{display: 'flex', alignContent: 'space-evenly', flexWrap: 'nowrap'}}>
               <div> */}
-                <ul className="list-unstyled mt-3 mb-4">
+            <ul className="list-unstyled mt-3 mb-4">
+              <div className='row'>
+                <div className='col-7'>
+            <h4 className="card-title pricing-card-title">{beer.sort}</h4>
+
                   <li>
                     <div className="row">
-                      <div className="col-5"><span className="text-muted">Крепость</span></div>
-                      <div className="col-4">{beer.abv}</div>
+                      <div className="col-8"><span className="text-muted">Крепость</span></div>
+                      <div className="col-4">{beer.abv} %</div>
                     </div>
                   </li>
                   <li>
                     <div className="row mt-2">
-                      <div className="col-5"><span className="text-muted">Горечь</span></div>
+                      <div className="col-8"><span className="text-muted">Горечь</span></div>
                       <div className="col-4">{beer.ibu}</div>
                     </div>
                   </li>
                   <li>
                     <div className="row mt-2">
-                      <div className="col-5"><span className="text-muted">Кислотность</span></div>
+                      <div className="col-8"><span className="text-muted">Цвет</span></div>
+                      <div className="col-4">{beer.ebc}</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="row mt-2">
+                      <div className="col-8"><span className="text-muted">Кислотность</span></div>
                       <div className="col-4">{beer.ph}</div>
                     </div>
                   </li>
-                </ul>
-              {/* </div> */}
+                  <li>
+                    <div className="row mt-2">
+                      <div className="col-8"><span className="text-muted">Объем</span></div>
+                      <div className="col-4">{beer.tareVolume} л</div>
+                    </div>
+                  </li>
+                </div>
+                <div className='col-5 d-flex align-items-center justify-content-center'>
+                <img src={beer?.imageUrl} alt="" width='100px' height='auto' />
 
-              <div className="logo mb-2" style={{display: 'flex', alignContent: 'center', justifyContent: 'center'}}>
-                <img src={beer?.imageUrl} alt="" width='100px' height='auto'/>
+                </div>
               </div>
+            </ul>
+            {/* </div> */}
+
+            <div className="logo mb-2" style={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>
+            </div>
             {/* </div> */}
 
             {
@@ -61,7 +81,7 @@ const StaffCardBeer = ({ beer }) => {
                   <button type="button" className="btn btn-outline-danger" onClick={() => deleteHandler(beer._id)}>Удалить</button>
                 </div>
             }
-            
+
           </div>
         </div>
       </div>

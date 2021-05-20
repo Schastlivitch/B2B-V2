@@ -40,11 +40,11 @@ const PartnerModalB = ({ partner }) => {
               <>
                 <div className="container">
                   <div className="row mb-5">
-                    <div className="col-3 d-flex justify-content-center align-items-center">
-                      <img src={partner?.imageUrl} alt="Аватар" width="200px" height="200px" />
+                    <div className="col-5 d-flex justify-content-center align-items-center">
+                      <img src={partner?.imageUrl} alt="Аватар" width="400px" height="190px" />
                     </div>
-                    <div className='col-9'>
-                      <div className="container ms-5">
+                    <div className='col-7'>
+                      <div className="container ms-3">
                         <h3>{partner?.title}</h3>
                         <hr />
                         <div className="row mt-3">

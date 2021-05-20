@@ -18,7 +18,7 @@ const StaffCardRequest = ({ request }) => {
 
   return (
     <>
-      <div className="col-6">
+      <div className="col-4">
         <div className="card mb-4 rounded-3 shadow-sm">
           <div className="card-header py-3">
             <h4 className="my-0 fw-normal">{request.title}</h4>
@@ -29,20 +29,20 @@ const StaffCardRequest = ({ request }) => {
             <ul className="list-unstyled mt-3 mb-4">
               <li>
                 <div className="row">
-                  <div className="col-5"><span className="text-muted">Вид поставки</span></div>
-                  <div className="col-4">{request.isPermanentSupply ? "Постоянная" : "Разовая"}</div>
+                  <div className="col-6"><span className="text-muted">Вид поставки</span></div>
+                  <div className="col-5">{request.isPermanentSupply ? "Постоянная" : "Разовая"}</div>
                 </div>
               </li>
               <li>
                 <div className="row mt-2">
-                  <div className="col-5"><span className="text-muted">Объем поставки</span></div>
-                  <div className="col-4">{request.supplyVolume}</div>
+                  <div className="col-6"><span className="text-muted">Объем поставки</span></div>
+                  <div className="col-5">{request.supplyVolume}</div>
                 </div>
               </li>
               <li>
                 <div className="row mt-2">
-                  <div className="col-5"><span className="text-muted">Цена</span></div>
-                  <div className="col-4">{request.price}</div>
+                  <div className="col-6"><span className="text-muted">Цена</span></div>
+                  <div className="col-5">{request.price}</div>
                 </div>
               </li>
             </ul>
