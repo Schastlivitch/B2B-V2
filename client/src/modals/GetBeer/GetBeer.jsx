@@ -5,6 +5,7 @@ import PartnerModalB from "../PartnerModal/PartnerModalB";
 const GetBeer = ({ beer }) => {
 
   const allBrewers = useSelector(state => state.brews)
+  const currentUser = useSelector(state => state.user)
   const currentBrewer = allBrewers?.filter(brew => brew._id === beer.brewery)
   console.log('BLA', currentBrewer);
 
@@ -20,70 +21,70 @@ const GetBeer = ({ beer }) => {
             <div className="modal-body">
               <ul className=" container list-unstyled mt-3 mb-4 row">
                 <div className="col-4 d-flex align-items-center justify-content-center">
-                <img src={beer?.imageUrl} alt="" width='130px' height='auto' />
+                  <img src={beer?.imageUrl} alt="" width='130px' height='auto' />
 
                 </div>
                 <div className="col-8">
-                <li className="border-bottom">
-                  <div className="row pb-2">
-                    <div className="col-6 d-flex align-items-center">
-                      <span className="">Сорт </span>
+                  <li className="border-bottom">
+                    <div className="row pb-2">
+                      <div className="col-6 d-flex align-items-center">
+                        <span className="">Сорт </span>
+                      </div>
+                      <div className="col-6">
+                        <span>{beer.sort} </span>
+                      </div>
                     </div>
-                    <div className="col-6">
-                      <span>{beer.sort} </span>
+                  </li>
+                  <li className="border-bottom">
+                    <div className="row mt-3 pb-3">
+                      <div className="col-6 d-flex align-items-center">
+                        <span>Крепость</span>
+                      </div>
+                      <div className="col-6">
+                        <span>{beer.abv} % </span>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <li className="border-bottom">
-                  <div className="row mt-3 pb-3">
-                    <div className="col-6 d-flex align-items-center">
-                      <span>Крепость</span>
+                  </li>
+                  <li className="border-bottom">
+                    <div className="row mt-3 pb-3">
+                      <div className="col-6 d-flex align-items-center">
+                        <span>Горечь</span>
+                      </div>
+                      <div className="col-6">
+                        <span>{beer.ibu} ibu </span>
+                      </div>
                     </div>
-                    <div className="col-6">
-                      <span>{beer.abv} % </span>
+                  </li>
+                  <li className="border-bottom">
+                    <div className="row mt-3 pb-3">
+                      <div className="col-6 d-flex align-items-center">
+                        <span>Насыщенность цвета </span>
+                      </div>
+                      <div className="col-6">
+                        <span>{beer.ebc} ebc </span>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <li className="border-bottom">
-                  <div className="row mt-3 pb-3">
-                    <div className="col-6 d-flex align-items-center">
-                      <span>Горечь</span>
+                  </li>
+                  <li className="border-bottom">
+                    <div className="row mt-3 pb-3">
+                      <div className="col-6 d-flex align-items-center">
+                        <span>Кислотность </span>
+                      </div>
+                      <div className="col-6">
+                        <span>{beer.ph} ph </span>
+                      </div>
                     </div>
-                    <div className="col-6">
-                      <span>{beer.ibu} ibu </span>
+                  </li>
+                  <li className="border-bottom">
+                    <div className="row mt-3 pb-3">
+                      <div className="col-6 d-flex align-items-center">
+                        <span>Объем тары </span>
+                      </div>
+                      <div className="col-6">
+                        <span>{beer.tareVolume} л </span>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <li className="border-bottom">
-                  <div className="row mt-3 pb-3">
-                    <div className="col-6 d-flex align-items-center">
-                      <span>Насыщенность цвета </span>
-                    </div>
-                    <div className="col-6">
-                      <span>{beer.ebc} ebc </span>
-                    </div>
-                  </div>
-                </li>
-                <li className="border-bottom">
-                  <div className="row mt-3 pb-3">
-                    <div className="col-6 d-flex align-items-center">
-                      <span>Кислотность </span>
-                    </div>
-                    <div className="col-6">
-                      <span>{beer.ph} ph </span>
-                    </div>
-                  </div>
-                </li>
-                <li className="border-bottom">
-                  <div className="row mt-3 pb-3">
-                    <div className="col-6 d-flex align-items-center">
-                      <span>Объем тары </span>
-                    </div>
-                    <div className="col-6">
-                      <span>{beer.tareVolume} л </span>
-                    </div>
-                  </div>
-                </li>
+                  </li>
 
                 </div>
                 <li className="border-bottom">
@@ -138,7 +139,12 @@ const GetBeer = ({ beer }) => {
               </ul>
             </div>
             <div className="d-flex align-items-center justify-content-center ">
-              <button type="button" className="btn btn-outline-success mb-4" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target={`#showPartnerB${currentBrewer[0]?._id}`}>Перейти к пивоварне</button>
+              {
+                currentUser?._id === currentBrewer[0]?._id ?
+                  null :
+                  <button type="button" className="btn btn-outline-success mb-4" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target={`#showPartnerB${currentBrewer[0]?._id}`}>Перейти к пивоварне</button>
+
+              }
             </div>
           </div>
         </div>

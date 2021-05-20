@@ -75,7 +75,7 @@ const Header = () => {
           </ul>
         </div>
       </nav>
-      <header className="py-3" style={{backgroundColor:'#343a403a'}}>
+      <header className="py-3 border-bottom border-dark" style={{backgroundColor:'rgb(199, 224, 229)'}}>
         <div className="container d-flex flex-wrap justify-content-center">
           <div className="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
             <span className="fs-4">Beer2Bar</span>
