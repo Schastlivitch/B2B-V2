@@ -93,7 +93,7 @@ const Header = () => {
             }
           </div>
           {
-            currenUser?._id ?
+            currenUser?._id && currenUser?.role === 'bar' ?
 
           <form className="col-12 col-lg-auto mb-3 mb-lg-0">
             <input type="search" className="form-control" placeholder="Поиск..." aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} data-bs-toggle="dropdown" />

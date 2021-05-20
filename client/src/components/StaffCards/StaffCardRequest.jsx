@@ -60,7 +60,7 @@ const StaffCardRequest = ({ request }) => {
         </div>
       </div>
       <EditRequest request={request} />
-      <PartnerModalB key={currentBar[0]._id} partner={currentBar[0]} />
+      <PartnerModalB key={currentBar[0]?._id} partner={currentBar[0]} />
     </>
   );
 }

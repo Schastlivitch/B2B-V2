@@ -67,6 +67,7 @@ const Signup = () => {
       const currentUser = await response.json()
       localStorage.setItem('token', `${currentUser.accessToken}`)
       dispatch(authCheckThunk())
+      history.push('/editprofile')
     } else {
       setWrongCode(true)
       setCode('')

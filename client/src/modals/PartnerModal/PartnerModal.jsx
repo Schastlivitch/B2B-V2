@@ -39,7 +39,7 @@ const PartnerModal = ({ partner }) => {
                 <div className="container">
                   <div className="row mb-5">
                     <div className="col-3 d-flex justify-content-center align-items-center">
-                      <img src="https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png" alt="Аватар" width="200px" height="200px" />
+                      <img src={partner?.imageUrl} alt="Аватар" width="200px" height="200px" />
                     </div>
                     <div className='col-9'>
                       <div className="container ms-5">

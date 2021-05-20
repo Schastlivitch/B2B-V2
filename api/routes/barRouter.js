@@ -21,7 +21,8 @@ router.get("/allbrewers", async (req, res) => {
         favourites: brew.favourites,
         login: brew.login,
         email: brew.email,
-        role: brew.role
+        role: brew.role,
+        imageUrl: brew.imageUrl
       }
     })
     res.send(allBrewsFront).status(200)

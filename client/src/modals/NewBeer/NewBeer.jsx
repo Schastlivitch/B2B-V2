@@ -5,7 +5,7 @@ import { addNewBeerThunk } from "../../redux/thunks/beerThunk";
 const NewBeer = () => {
   const dispatch = useDispatch();
   const userID = useSelector((state) => state.user._id);
-  
+
   const [title, setTitle] = useState("");
   const [sort, setSort] = useState("");
   const [img, setImg] = useState("");
@@ -60,13 +60,20 @@ const NewBeer = () => {
     setPermanentSupplyPrice(e.target.value);
   };
 
+  const randomNum = Math.floor(Math.random() * 300)
+  function checkBeerImage(img, random) {
+
+    return `http://localhost:8080/images/beers/${random}.jpg`
+
+  }
+
   const newBeerHandler = async () => {
-    const randomNum = Math.floor(Math.random() * 300)
     dispatch(
       addNewBeerThunk(img, randomNum, {
         brewery: userID,
         title,
-        imageUrl: `/images/beers/${randomNum}.jpg`,
+        // imageUrl: `/images/beers/${randomNum}.jpg`,
+        imageUrl: checkBeerImage(img, randomNum),
         sort,
         abv: Number(abv),
         ibu: Number(ibu),

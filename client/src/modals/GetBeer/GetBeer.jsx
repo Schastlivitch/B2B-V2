@@ -138,7 +138,7 @@ const GetBeer = ({ beer }) => {
           </div>
         </div>
       </div>
-      <PartnerModalB key={currentBrewer[0]._id} partner={currentBrewer[0]} />
+      <PartnerModalB key={currentBrewer[0]?._id} partner={currentBrewer[0]} />
     </>
   )
 }

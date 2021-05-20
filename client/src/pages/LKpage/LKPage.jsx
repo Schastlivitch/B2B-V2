@@ -32,7 +32,7 @@ const LKpage = () => {
           <div className="col-3 d-flex justify-content-center align-items-center">
             <img
               src={currenUser?.imageUrl}
-              alt="https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png"
+              alt="avatar"
               width="300px"
               height="300px"
               style={{borderRadius: '50%'}}
