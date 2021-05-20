@@ -4,7 +4,9 @@ import { YMaps, Map, Placemark } from 'react-yandex-maps'
 import Chat from "../Chat/Chat";
 
 
-const PartnerModal = ({ partner }) => {
+const PartnerModalB = ({ partner }) => {
+
+  console.log("PARTNER",partner);
 
   const dispatch = useDispatch()
 
@@ -27,7 +29,7 @@ const PartnerModal = ({ partner }) => {
 
   return (
     <>
-      <div class="modal fade" id={`showPartner${partner?._id}`} tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal fade" id={`showPartnerB${partner?._id}`} tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -116,4 +118,4 @@ const PartnerModal = ({ partner }) => {
   );
 }
 
-export default PartnerModal
+export default PartnerModalB

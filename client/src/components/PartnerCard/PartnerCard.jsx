@@ -5,7 +5,7 @@ const PartnerCard = ({ partner }) => {
     <>
       <div className="col">
         <div className="card shadow-sm">
-          <img src="https://static.tildacdn.com/tild6235-3533-4138-b363-666630346432/bage.jpg" alt="" />
+          <img src={partner?.imageUrl} alt="" height="200px" />
           <div className="card-body">
             <strong>{partner?.title}</strong>
             {/* <p className="card-text">Текст длинной в 93 символа будет помещаться в 2 строки и дальше будет обрезаться с добавление...</p> */}
