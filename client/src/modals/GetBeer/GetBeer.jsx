@@ -1,6 +1,12 @@
+import { useSelector } from "react-redux";
+import PartnerModalB from "../PartnerModal/PartnerModalB";
 
 
 const GetBeer = ({ beer }) => {
+
+  const allBrewers = useSelector(state => state.brews)
+  const currentBrewer = allBrewers?.filter(brew => brew._id === beer.brewery)
+  console.log('BLA', currentBrewer);
 
   return (
     <>
@@ -126,10 +132,13 @@ const GetBeer = ({ beer }) => {
                 </li>
               </ul>
             </div>
-
+            <div className="d-flex align-items-center justify-content-center ">
+              <button type="button" className="btn btn-outline-success mb-3" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target={`#showPartnerB${currentBrewer[0]?._id}`}>Перейти к пивоварне</button>
+            </div>
           </div>
         </div>
       </div>
+      <PartnerModalB key={currentBrewer[0]._id} partner={currentBrewer[0]} />
     </>
   )
 }

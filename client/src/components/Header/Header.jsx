@@ -25,9 +25,11 @@ const Header = () => {
         <div className="container d-flex flex-wrap">
           <ul className="nav me-auto">
             {
+              !currenUser?._id ?
+              <li className="nav-item"><Link to="/" className="nav-link link-dark px-2">Главная</Link></li>
+              :
               currenUser?.role === 'bar' ?
                 <>
-                  <li className="nav-item"><Link to="/" className="nav-link link-dark px-2">Главная</Link></li>
                   <li className="nav-item"><Link to="/brewers" className="nav-link link-dark px-2">Пивоварни</Link></li>
                   <li className="nav-item"><Link to="/allbeers" className="nav-link link-dark px-2">Все пиво</Link></li>
                   <li className="nav-item"><Link to="/chats" className="nav-link link-dark px-2">Чаты</Link></li>
@@ -35,13 +37,13 @@ const Header = () => {
                 </>
                 :
                 <>
-                  <li className="nav-item"><Link to="/" className="nav-link link-dark px-2">Главная</Link></li>
                   <li className="nav-item"><Link to="/bars" className="nav-link link-dark px-2">Бары</Link></li>
                   <li className="nav-item"><Link to="/allrequests" className="nav-link link-dark px-2">Все запросы</Link></li>
                   <li className="nav-item"><Link to="/chats" className="nav-link link-dark px-2">Чаты</Link></li>
                   <li className="nav-item"><Link to="/info" className="nav-link link-dark px-2">О нас</Link></li>
                 </>
-            }
+            
+          }
           </ul>
           <ul className="nav">
             {
@@ -90,6 +92,9 @@ const Header = () => {
                 null
             }
           </div>
+          {
+            currenUser?._id ?
+
           <form className="col-12 col-lg-auto mb-3 mb-lg-0">
             <input type="search" className="form-control" placeholder="Поиск..." aria-label="Search" value={search} onChange={(e) => setSearch(e.target.value)} data-bs-toggle="dropdown" />
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style={{ width: "274px" }}>
@@ -116,6 +121,10 @@ const Header = () => {
               }
             </ul>
           </form>
+          :
+          null
+          }
+
         </div>
       </header>
     </>

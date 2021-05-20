@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useState, useRef, useEffect } from "react";
 import StaffCardRequest from "../../components/StaffCards/StaffCardRequest";
 
 const AllRequests = () => {
@@ -6,40 +7,72 @@ const AllRequests = () => {
   const allRequests = useSelector(state => state.requests)
   const allBars = useSelector(state => state.bars)
 
+  const allRequestsSorts = allRequests?.map(beer => beer.sort)
+  const uniqueRequestsSorts = allRequestsSorts?.filter((val, i, ar) => ar.indexOf(val) === i)
+
+  const myFormRef = useRef()
+
+  const [sortFilter, setSortFilter] = useState([])
+
+  const sortFilterHandler = () => {
+    console.log(myFormRef.current.elements);
+    const pseudo = [...myFormRef.current.elements]
+    pseudo.map(el => {
+      if (el.checked && !sortFilter.includes(el.value)) {
+        setSortFilter(prev => [...prev, el.value])
+      } else if (!el.checked) {
+        setSortFilter(prev => prev.filter(element => element !== el.value))
+      }
+    })
+  }
+
+  const [filtredRequesrs, setFiltredRequesrs] = useState([])
+
+  useEffect(() => {
+    setFiltredRequesrs(allRequests?.map(request => {
+      if (sortFilter.includes(request.sort)) {
+        return request
+      }
+    }))
+  }, [sortFilter])
+
   return (
     <>
       <div className="container">
         <div id="mobile-filter" className="row">
           <div className='col-2'>
             <div className="py-3">
-              <h5 className="font-weight-bold">Бар</h5>
+              <h5 className="font-weight-bold">Сорт</h5>
               <div class="form-check">
-                {
-                  allBars?.map(bar => {
-                    return (
-                      <>
-                        <input class="form-check-input" type="checkbox" value={bar.title} />
-                        <label class="form-check-label" for="flexCheckDefault">{bar.title}</label>
-                        <br />
-                      </>
-                    )
-                  })
-                }
+                <form ref={myFormRef} onChange={sortFilterHandler}>
+                  {
+                    uniqueRequestsSorts?.map(sort => {
+                      return (
+                        <>
+                          <div className="mt-3">
+                            <input class="form-check-input" type="checkbox" name={sort} value={sort} />
+                            <label class="form-check-label" for="flexCheckDefault">{sort}</label>
+                            <br />
+                          </div>
+                        </>
+                      )
+                    })
+                  }
+                </form>
               </div>
-              <h5 className="font-weight-bold mt-4">Вид поставки</h5>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value={true} />
-                <label class="form-check-label" for="flexCheckDefault">Постоянная поставка</label>
-                <br />
-                <input class="form-check-input" type="checkbox" value={false} />
-                <label class="form-check-label" for="flexCheckDefault">Разовая поставка</label>
-                <br />
-              </div>
+
             </div>
           </div>
           <div className='col-10'>
             <div className="row mb-3">
-              {allRequests?.length ? allRequests.map(request => <StaffCardRequest key={request._id} request={request} />) : 'Запросов нет'}
+              {/* {allRequests?.length ? allRequests.map(request => <StaffCardRequest key={request._id} request={request} />) : 'Запросов нет'} */}
+              {
+                !sortFilter.length ?
+                  allRequests?.length ? allRequests.map(request => <StaffCardRequest key={request._id} request={request} />) : 'Запросов нет'
+                  :
+                  filtredRequesrs?.length ? filtredRequesrs.map(request => request ? <StaffCardRequest key={request._id} request={request} /> : null) : 'Запросов нет'
+
+              }
             </div>
           </div>
         </div>
