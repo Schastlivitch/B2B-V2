@@ -66,16 +66,16 @@ const LKedit = () => {
     <>
       <div className="container">
         <div className="row mb-5">
-          <div className="col-3 d-flex justify-content-center align-items-center">
-            <img
+          <div className="col-5 d-flex justify-content-center align-items-center">
+          <img
               src={currenUser?.imageUrl}
-              alt="https://lumpics.ru/wp-content/uploads/2017/11/Programmyi-dlya-sozdaniya-avatarok.png"
-              width="300px"
-              height="300px"
-              style={{borderRadius: '50%'}}
+              alt="avatar"
+              width="504"
+              height="240px"
+              
             />
           </div>
-          <div className="col-9">
+          <div className="col-7">
             <div className="container ms-5">
               <h3>
                 <input

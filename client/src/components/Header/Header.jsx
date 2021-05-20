@@ -30,16 +30,16 @@ const Header = () => {
               :
               currenUser?.role === 'bar' ?
                 <>
-                  <li className="nav-item"><Link to="/brewers" className="nav-link link-dark px-2">Пивоварни</Link></li>
                   <li className="nav-item"><Link to="/allbeers" className="nav-link link-dark px-2">Все пиво</Link></li>
-                  <li className="nav-item"><Link to="/chats" className="nav-link link-dark px-2">Чаты</Link></li>
+                  <li className="nav-item"><Link to="/brewers" className="nav-link link-dark px-2">Пивоварни</Link></li>
+                  {/* <li className="nav-item"><Link to="/chats" className="nav-link link-dark px-2">Чаты</Link></li> */}
                   <li className="nav-item"><Link to="/info" className="nav-link link-dark px-2">О нас</Link></li>
                 </>
                 :
                 <>
-                  <li className="nav-item"><Link to="/bars" className="nav-link link-dark px-2">Бары</Link></li>
                   <li className="nav-item"><Link to="/allrequests" className="nav-link link-dark px-2">Все запросы</Link></li>
-                  <li className="nav-item"><Link to="/chats" className="nav-link link-dark px-2">Чаты</Link></li>
+                  <li className="nav-item"><Link to="/bars" className="nav-link link-dark px-2">Бары</Link></li>
+                  {/* <li className="nav-item"><Link to="/chats" className="nav-link link-dark px-2">Чаты</Link></li> */}
                   <li className="nav-item"><Link to="/info" className="nav-link link-dark px-2">О нас</Link></li>
                 </>
             
@@ -62,7 +62,7 @@ const Header = () => {
                           <li><Link to="/mystaff" className="dropdown-item">Мое пиво</Link></li>
                       }
                       <li><hr className="dropdown-divider" /></li>
-                      <li><span className="dropdown-item" onClick={signoutUser}>Выйти</span></li>
+                      <li><Link className="dropdown-item" onClick={signoutUser}>Выйти</Link></li>
                     </ul>
                   </div>
                 </>

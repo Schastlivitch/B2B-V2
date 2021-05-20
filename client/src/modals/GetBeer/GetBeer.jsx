@@ -18,111 +18,116 @@ const GetBeer = ({ beer }) => {
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
-              <ul className="list-unstyled mt-3 mb-4">
+              <ul className=" container list-unstyled mt-3 mb-4 row">
+                <div className="col-4 d-flex align-items-center justify-content-center">
+                <img src={beer?.imageUrl} alt="" width='130px' height='auto' />
 
-                <li>
-                  <div className="row ">
+                </div>
+                <div className="col-8">
+                <li className="border-bottom">
+                  <div className="row pb-2">
                     <div className="col-6 d-flex align-items-center">
-                      <span>Сорт </span>
+                      <span className="">Сорт </span>
                     </div>
                     <div className="col-6">
                       <span>{beer.sort} </span>
                     </div>
                   </div>
                 </li>
-
-                <li>
-                  <div className="row mt-4">
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
                     <div className="col-6 d-flex align-items-center">
                       <span>Крепость</span>
                     </div>
                     <div className="col-6">
-                      <span>{beer.abv} </span>
+                      <span>{beer.abv} % </span>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="row mt-4">
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
                     <div className="col-6 d-flex align-items-center">
                       <span>Горечь</span>
                     </div>
                     <div className="col-6">
-                      <span>{beer.ibu} </span>
+                      <span>{beer.ibu} ibu </span>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="row mt-4">
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
                     <div className="col-6 d-flex align-items-center">
                       <span>Насыщенность цвета </span>
                     </div>
                     <div className="col-6">
-                      <span>{beer.ebc} </span>
+                      <span>{beer.ebc} ebc </span>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="row mt-4">
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
                     <div className="col-6 d-flex align-items-center">
                       <span>Кислотность </span>
                     </div>
                     <div className="col-6">
-                      <span>{beer.ph} </span>
+                      <span>{beer.ph} ph </span>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="row mt-4">
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
                     <div className="col-6 d-flex align-items-center">
                       <span>Объем тары </span>
                     </div>
                     <div className="col-6">
-                      <span>{beer.tareVolume} </span>
+                      <span>{beer.tareVolume} л </span>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="row mt-4">
-                    <div className="col-6 d-flex align-items-center">
+
+                </div>
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
+                    <div className="col-8 d-flex align-items-center">
                       <span>Объем разовой поставки </span>
                     </div>
-                    <div className="col-6">
-                      <span>{beer.onceSupplyVolume} </span>
+                    <div className="col-4">
+                      <span>{beer.onceSupplyVolume} шт </span>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="row mt-4">
-                    <div className="col-6 d-flex align-items-center">
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
+                    <div className="col-8 d-flex align-items-center">
                       <span>Стоимость ед. при разовой поставке</span>
                     </div>
-                    <div className="col-6">
-                      <span>{beer.onceSupplyPrice} </span>
+                    <div className="col-4">
+                      <span>{beer.onceSupplyPrice} руб </span>
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="row mt-4">
-                    <div className="col-6 d-flex align-items-center">
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
+                    <div className="col-8 d-flex align-items-center">
                       <span>Объем постоянной поставки</span>
                     </div>
-                    <div className="col-6">
-                      <span>{beer.permanentSupplyVolume} </span>
+                    <div className="col-4">
+                      <span>{beer.permanentSupplyVolume} шт/мес</span>
+                    </div>
+                  </div>
+                </li>
+                <li className="border-bottom">
+                  <div className="row mt-3 pb-3">
+                    <div className="col-8 d-flex align-items-center">
+                      <span>Стоимость ед. при постоянной поставке</span>
+                    </div>
+                    <div className="col-4">
+                      <span>{beer.permanentSupplyPrice} руб</span>
                     </div>
                   </div>
                 </li>
                 <li>
                   <div className="row mt-4">
-                    <div className="col-6 d-flex align-items-center">
-                      <span>Стоимость ед. при постоянной поставке</span>
-                    </div>
-                    <div className="col-6">
-                      <span>{beer.permanentSupplyPrice} </span>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div className="row mt-5">
                     <span className="mb-3"><h5>Краткое описание</h5> </span>
                     <hr />
                     <div >
@@ -133,7 +138,7 @@ const GetBeer = ({ beer }) => {
               </ul>
             </div>
             <div className="d-flex align-items-center justify-content-center ">
-              <button type="button" className="btn btn-outline-success mb-3" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target={`#showPartnerB${currentBrewer[0]?._id}`}>Перейти к пивоварне</button>
+              <button type="button" className="btn btn-outline-success mb-4" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target={`#showPartnerB${currentBrewer[0]?._id}`}>Перейти к пивоварне</button>
             </div>
           </div>
         </div>

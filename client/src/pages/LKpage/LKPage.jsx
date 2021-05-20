@@ -29,16 +29,16 @@ const LKpage = () => {
     <>
       <div className="container">
         <div className="row mb-5">
-          <div className="col-3 d-flex justify-content-center align-items-center">
+          <div className="col-5 d-flex justify-content-center align-items-center">
             <img
               src={currenUser?.imageUrl}
               alt="avatar"
-              width="300px"
-              height="300px"
-              style={{borderRadius: '50%'}}
+              width="504"
+              height="240px"
+              
             />
           </div>
-          <div className="col-9">
+          <div className="col-7">
             <div className="container ms-5">
               <h3>{currenUser?.title}</h3>
               <hr />
