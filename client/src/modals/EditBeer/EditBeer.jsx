@@ -25,7 +25,7 @@ const EditBeer = ({ beer }) => {
   useEffect(() => {
     setTitle(beer.title)
     setSort(beer.sort)
-    setImg(beer.imageUrl)
+    // setImg(beer.imageUrl)
     setAbv(beer.abv)
     setIbu(beer.ibu)
     setEbc(beer.ebc)
@@ -105,6 +105,7 @@ const EditBeer = ({ beer }) => {
       onceSupplyPrice,
       permanentSupplyPrice, 
     }))
+    setImg('')
   }
 
   return (
