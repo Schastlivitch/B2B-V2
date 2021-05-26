@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 
 const PORT = process.env.PORT || 3005
-const dbConnectionURL = 'mongodb+srv://Ivan:Isupov95@cluster0.wvc9q.mongodb.net/b2b-v2?retryWrites=true&w=majority'
+const dbConnectionURL = 
 const secretKey = process.env.secretKey
 
 
